@@ -1,0 +1,28 @@
+# Maintainer: hyperpolymath <packages@hyperpolymath.dev>
+# PKGBUILD for zigzag-ssg
+
+pkgname=zigzag-ssg
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="High-performance static site generator written in Zig"
+arch=('x86_64' 'aarch64')
+url="https://github.com/hyperpolymath/zigzag-ssg"
+license=('AGPL-3.0-or-later')
+depends=('glibc')
+makedepends=('zig')
+provides=('zigzag-ssg')
+conflicts=('zigzag-ssg-git' 'zigzag-ssg-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/zigzag-ssg/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgname-$pkgver"
+    zig build -Doptimize=ReleaseFast
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+    install -Dm755 "zig-out/bin/zigzag-ssg" "$pkgdir/usr/bin/zigzag-ssg"
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt" 2>/dev/null || true
+    install -Dm644 README.adoc "$pkgdir/usr/share/doc/$pkgname/README.adoc" 2>/dev/null || true
+}

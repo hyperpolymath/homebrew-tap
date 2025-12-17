@@ -1,0 +1,29 @@
+# Maintainer: hyperpolymath <packages@hyperpolymath.dev>
+# PKGBUILD for casket-ssg
+
+pkgname=casket-ssg
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Pure functional static site generator written in Haskell"
+arch=('x86_64' 'aarch64')
+url="https://github.com/hyperpolymath/casket-ssg"
+license=('AGPL-3.0-or-later')
+depends=('gmp' 'libffi' 'zlib')
+makedepends=('ghc' 'cabal-install')
+provides=('casket-ssg')
+conflicts=('casket-ssg-git' 'casket-ssg-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/casket-ssg/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgname-$pkgver"
+    cabal update
+    cabal build --enable-executable-static || cabal build
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+    install -Dm755 "$(find dist-newstyle -name casket-ssg -type f | head -1)" "$pkgdir/usr/bin/casket-ssg"
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt" 2>/dev/null || true
+    install -Dm644 README.adoc "$pkgdir/usr/share/doc/$pkgname/README.adoc" 2>/dev/null || true
+}

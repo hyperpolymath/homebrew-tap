@@ -1,0 +1,28 @@
+# Maintainer: hyperpolymath <packages@hyperpolymath.dev>
+# PKGBUILD for kith
+
+pkgname=kith
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Ada-powered TUI for .well-known directory management"
+arch=('x86_64' 'aarch64')
+url="https://github.com/hyperpolymath/kith"
+license=('AGPL-3.0-or-later')
+depends=('glibc')
+makedepends=('gcc-ada' 'gprbuild')
+provides=('kith')
+conflicts=('kith-git' 'kith-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/kith/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgname-$pkgver"
+    gprbuild -P kith.gpr -XBUILD_MODE=release
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+    install -Dm755 "bin/kith" "$pkgdir/usr/bin/kith"
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt" 2>/dev/null || true
+    install -Dm644 README.adoc "$pkgdir/usr/share/doc/$pkgname/README.adoc" 2>/dev/null || true
+}

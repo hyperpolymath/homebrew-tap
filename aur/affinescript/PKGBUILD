@@ -1,0 +1,30 @@
+# Maintainer: hyperpolymath <packages@hyperpolymath.dev>
+# PKGBUILD for affinescript
+
+pkgname=affinescript
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Programming language combining affine types with functional programming"
+arch=('x86_64' 'aarch64')
+url="https://github.com/hyperpolymath/affinescript"
+license=('AGPL-3.0-or-later')
+depends=('glibc')
+makedepends=('ocaml' 'opam' 'dune')
+provides=('affinescript')
+conflicts=('affinescript-git' 'affinescript-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/affinescript/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgname-$pkgver"
+    opam install . --deps-only -y || true
+    dune build --release
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+    install -Dm755 "_build/default/bin/main.exe" "$pkgdir/usr/bin/affinescript" 2>/dev/null || \
+    install -Dm755 "_build/default/bin/affinescript.exe" "$pkgdir/usr/bin/affinescript"
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt" 2>/dev/null || true
+    install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}
