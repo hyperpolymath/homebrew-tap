@@ -42,17 +42,43 @@ scoop install hyperpolymath/echidnabot
 
 All manifests are located in the `bucket/` directory.
 
+## APT Repository (Debian/Ubuntu)
+
+```bash
+# Add repository (unsigned for now)
+echo "deb [trusted=yes] https://hyperpolymath.github.io/homebrew-tap/apt stable main" | sudo tee /etc/apt/sources.list.d/hyperpolymath.list
+sudo apt update
+
+# Install packages
+sudo apt install bunsenite czech-file-knife echidnabot
+```
+
+See [apt/README.md](apt/README.md) for GPG-signed setup.
+
+## DNF/Zypper Repository (Fedora/openSUSE)
+
+```bash
+# Fedora/RHEL
+sudo tee /etc/yum.repos.d/hyperpolymath.repo << 'EOF'
+[hyperpolymath]
+name=Hyperpolymath Packages
+baseurl=https://hyperpolymath.github.io/homebrew-tap/rpm
+enabled=1
+gpgcheck=0
+EOF
+
+sudo dnf install bunsenite czech-file-knife echidnabot
+```
+
+See [rpm/README.md](rpm/README.md) for openSUSE instructions.
+
 ## Other Package Managers
 
-Additional package manifests are available in each project's `packaging/` directory:
-
-- **Arch Linux (AUR)**: `PKGBUILD`
-- **Debian/Ubuntu**: `.deb` packages via GitHub Releases
-- **Fedora/openSUSE**: `.rpm` packages via GitHub Releases
-- **Flatpak**: Submit to Flathub
-- **WinGet**: Available via `winget install Hyperpolymath.<package>`
-- **Chocolatey**: Available via `choco install <package>`
-- **MacPorts**: `Portfile` in each repo's `packaging/macports/`
+- **Arch Linux (AUR)**: `yay -S bunsenite` (when submitted)
+- **Flatpak**: `flatpak install flathub dev.hyperpolymath.<package>` (when submitted)
+- **WinGet**: `winget install Hyperpolymath.<Package>`
+- **Chocolatey**: `choco install <package>`
+- **MacPorts**: `sudo port install <package>` (when submitted)
 
 ## License
 

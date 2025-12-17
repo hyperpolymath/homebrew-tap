@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2025 hyperpolymath
+
+name: Update APT Repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package name (bunsenite, czech-file-knife, echidnabot)'
+        required: true
+        type: choice
+        options:
+          - bunsenite
+          - czech-file-knife
+          - echidnabot
+      version:
+        description: 'Version (e.g., 1.0.0)'
+        required: true
+
+permissions: read-all
+
+jobs:
+  update-apt:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Install apt-ftparchive
+        run: sudo apt-get update && sudo apt-get install -y apt-utils gnupg
+
+      - name: Setup GPG
+        run: |
+          echo "${{ secrets.APT_GPG_PRIVATE_KEY }}" | gpg --import
+        if: ${{ secrets.APT_GPG_PRIVATE_KEY != '' }}
+
+      - name: Download .deb from release
+        run: |
+          mkdir -p apt/pool/main
+          curl -L -o apt/pool/main/${{ inputs.package }}_${{ inputs.version }}_amd64.deb \
+            "https://github.com/hyperpolymath/${{ inputs.package }}/releases/download/v${{ inputs.version }}/${{ inputs.package }}_${{ inputs.version }}_amd64.deb"
+
+      - name: Generate Packages file
+        run: |
+          mkdir -p apt/dists/stable/main/binary-amd64
+          cd apt
+          apt-ftparchive packages pool/main > dists/stable/main/binary-amd64/Packages
+          gzip -k dists/stable/main/binary-amd64/Packages
+
+      - name: Generate Release file
+        run: |
+          cd apt/dists/stable
+          apt-ftparchive release . > Release
+
+      - name: Sign Release (if GPG key available)
+        run: |
+          cd apt/dists/stable
+          gpg --default-key hyperpolymath -abs -o Release.gpg Release
+          gpg --default-key hyperpolymath --clearsign -o InRelease Release
+        if: ${{ secrets.APT_GPG_PRIVATE_KEY != '' }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apt/
+          git commit -m "Update APT repository: ${{ inputs.package }} v${{ inputs.version }}" || exit 0
+          git push

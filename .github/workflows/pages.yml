@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2025 hyperpolymath
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apt/**'
+      - 'rpm/**'
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Setup Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+
+      - name: Create pages directory
+        run: |
+          mkdir -p _site
+          cp -r apt _site/ 2>/dev/null || true
+          cp -r rpm _site/ 2>/dev/null || true
+          echo "# Hyperpolymath Package Repository" > _site/index.html
+          echo "<p>See <a href='https://github.com/hyperpolymath/homebrew-tap'>the repository</a> for installation instructions.</p>" >> _site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2025 hyperpolymath
+
+name: Update RPM Repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package name (bunsenite, czech-file-knife, echidnabot)'
+        required: true
+        type: choice
+        options:
+          - bunsenite
+          - czech-file-knife
+          - echidnabot
+      version:
+        description: 'Version (e.g., 1.0.0)'
+        required: true
+
+permissions: read-all
+
+jobs:
+  update-rpm:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Install createrepo
+        run: sudo apt-get update && sudo apt-get install -y createrepo-c
+
+      - name: Download .rpm from release
+        run: |
+          mkdir -p rpm/packages
+          curl -L -o rpm/packages/${{ inputs.package }}-${{ inputs.version }}-1.x86_64.rpm \
+            "https://github.com/hyperpolymath/${{ inputs.package }}/releases/download/v${{ inputs.version }}/${{ inputs.package }}-${{ inputs.version }}-1.x86_64.rpm"
+
+      - name: Generate RPM repository metadata
+        run: |
+          cd rpm
+          createrepo_c .
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add rpm/
+          git commit -m "Update RPM repository: ${{ inputs.package }} v${{ inputs.version }}" || exit 0
+          git push
