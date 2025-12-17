@@ -1,0 +1,56 @@
+# Maintainer: hyperpolymath <packages@hyperpolymath.dev>
+# PKGBUILD for bunsenite
+
+pkgname=bunsenite
+pkgver=1.0.2
+pkgrel=1
+pkgdesc="Nickel configuration file parser with multi-language FFI bindings"
+arch=('x86_64' 'aarch64')
+url="https://github.com/hyperpolymath/bunsenite"
+license=('MIT' 'custom:Palimpsest-0.8')
+depends=('gcc-libs')
+makedepends=('rust' 'cargo' 'zig')
+optdepends=(
+    'deno: For Deno TypeScript bindings'
+)
+provides=('bunsenite')
+conflicts=('bunsenite-git' 'bunsenite-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/bunsenite/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgname-$pkgver"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cargo build --release --features full
+
+    # Build Zig FFI layer if present
+    if [ -d "zig" ]; then
+        cd zig
+        zig build -Doptimize=ReleaseFast
+    fi
+}
+
+check() {
+    cd "$pkgname-$pkgver"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo test --release
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+
+    # Install binary
+    install -Dm755 "target/release/bunsenite" "$pkgdir/usr/bin/bunsenite"
+
+    # Install shared library if built
+    if [ -f "zig/zig-out/lib/libbunsenite.so" ]; then
+        install -Dm755 "zig/zig-out/lib/libbunsenite.so" "$pkgdir/usr/lib/libbunsenite.so"
+    fi
+
+    # Install license
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt"
+
+    # Install documentation
+    install -Dm644 README.adoc "$pkgdir/usr/share/doc/$pkgname/README.adoc"
+}
