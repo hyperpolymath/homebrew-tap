@@ -1,0 +1,59 @@
+# Maintainer: hyperpolymath <packages@hyperpolymath.dev>
+# PKGBUILD for vext
+
+pkgname=vext
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="High-performance IRC notification daemon for version control systems"
+arch=('x86_64' 'aarch64')
+url="https://github.com/hyperpolymath/vext"
+license=('MIT' 'AGPL-3.0-or-later')
+depends=('gcc-libs' 'openssl')
+makedepends=('rust' 'cargo')
+provides=('vext' 'vextd' 'vext-send')
+conflicts=('vext-git' 'vext-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/vext/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgname-$pkgver"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cargo build --release --package vext-core
+}
+
+check() {
+    cd "$pkgname-$pkgver"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo test --release --package vext-core
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+
+    # Install binaries
+    install -Dm755 "target/release/vextd" "$pkgdir/usr/bin/vextd"
+    install -Dm755 "target/release/vext-send" "$pkgdir/usr/bin/vext-send" 2>/dev/null || true
+
+    # Install license
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt"
+
+    # Install documentation
+    install -Dm644 README.adoc "$pkgdir/usr/share/doc/$pkgname/README.adoc"
+
+    # Install systemd service
+    install -Dm644 /dev/stdin "$pkgdir/usr/lib/systemd/user/vextd.service" <<EOF
+[Unit]
+Description=Vext IRC Notification Daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/vextd
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+}

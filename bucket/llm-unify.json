@@ -1,0 +1,23 @@
+{
+    "version": "0.1.0",
+    "description": "Unified interface for multi-platform LLM conversation management",
+    "homepage": "https://github.com/hyperpolymath/llm-unify",
+    "license": "AGPL-3.0-or-later",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/hyperpolymath/llm-unify/releases/download/v0.1.0/llm-unify-v0.1.0-x86_64-pc-windows-msvc.zip",
+            "hash": "PLACEHOLDER",
+            "bin": "llm-unify.exe"
+        }
+    },
+    "checkver": {
+        "github": "https://github.com/hyperpolymath/llm-unify"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/hyperpolymath/llm-unify/releases/download/v$version/llm-unify-v$version-x86_64-pc-windows-msvc.zip"
+            }
+        }
+    }
+}

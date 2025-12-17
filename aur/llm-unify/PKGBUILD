@@ -1,0 +1,44 @@
+# Maintainer: hyperpolymath <packages@hyperpolymath.dev>
+# PKGBUILD for llm-unify
+
+pkgname=llm-unify
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Unified interface for multi-platform LLM conversation management"
+arch=('x86_64' 'aarch64')
+url="https://github.com/hyperpolymath/llm-unify"
+license=('AGPL-3.0-or-later')
+depends=('gcc-libs' 'sqlite')
+makedepends=('rust' 'cargo')
+provides=('llm-unify')
+conflicts=('llm-unify-git' 'llm-unify-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/hyperpolymath/llm-unify/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cd "$pkgname-$pkgver"
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cargo build --release --package llm-unify-cli
+    cargo build --release --package llm-unify-tui || true
+}
+
+check() {
+    cd "$pkgname-$pkgver"
+    export RUSTUP_TOOLCHAIN=stable
+    cargo test --release
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+
+    # Install binaries
+    install -Dm755 "target/release/llm-unify" "$pkgdir/usr/bin/llm-unify"
+    install -Dm755 "target/release/llm-unify-tui" "$pkgdir/usr/bin/llm-unify-tui" 2>/dev/null || true
+
+    # Install license
+    install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE.txt"
+
+    # Install documentation
+    install -Dm644 README.adoc "$pkgdir/usr/share/doc/$pkgname/README.adoc"
+}
