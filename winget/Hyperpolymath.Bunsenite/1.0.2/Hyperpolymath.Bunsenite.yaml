@@ -37,7 +37,7 @@ Installers:
   - Architecture: x64
     InstallerType: zip
     InstallerUrl: https://github.com/hyperpolymath/bunsenite/releases/download/v1.0.2/bunsenite-v1.0.2-x86_64-pc-windows-msvc.zip
-    InstallerSha256: # TODO: Add actual SHA256
+    InstallerSha256: 54c62b1eb864500abe993978122ab53e1b80ff5e8240caa60f71a60ff1e90009
     NestedInstallerType: portable
     NestedInstallerFiles:
       - RelativeFilePath: bunsenite.exe
