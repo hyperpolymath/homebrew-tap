@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>dev.hyperpolymath.CzechFileKnife</id>
+  <name>Czech File Knife</name>
+  <summary>Universal file management toolkit with cloud provider integration</summary>
+  <metadata_license>AGPL-3.0-or-later</metadata_license>
+  <project_license>AGPL-3.0-or-later</project_license>
+
+  <description>
+    <p>
+      Czech File Knife (cfk) is a universal file management toolkit with cloud
+      provider integration and virtual filesystem support. It provides a unified
+      interface for managing files across local storage and cloud providers.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Virtual filesystem (FUSE) for mounting cloud storage</li>
+      <li>Content-addressable caching with Blake3 hashing</li>
+      <li>Full-text search indexing with Tantivy</li>
+      <li>Multi-provider support (local, S3, GCS, Azure, etc.)</li>
+      <li>Streaming copy with progress indication</li>
+    </ul>
+  </description>
+
+  <url type="homepage">https://github.com/hyperpolymath/czech-file-knife</url>
+  <url type="bugtracker">https://github.com/hyperpolymath/czech-file-knife/issues</url>
+  <url type="vcs-browser">https://github.com/hyperpolymath/czech-file-knife</url>
+
+  <provides>
+    <binary>cfk</binary>
+  </provides>
+
+  <releases>
+    <release version="0.1.0" date="2025-01-01">
+      <description>
+        <p>Initial release</p>
+      </description>
+    </release>
+  </releases>
+
+  <content_rating type="oars-1.1" />
+
+  <categories>
+    <category>FileTools</category>
+    <category>Utility</category>
+    <category>FileManager</category>
+  </categories>
+
+  <keywords>
+    <keyword>file</keyword>
+    <keyword>manager</keyword>
+    <keyword>cloud</keyword>
+    <keyword>storage</keyword>
+    <keyword>fuse</keyword>
+  </keywords>
+</component>
