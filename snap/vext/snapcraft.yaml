@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: MIT
+name: vext
+version: '1.0.0'
+summary: High-performance IRC notification daemon for VCS
+description: |
+  Vext is a high-performance IRC notification daemon for version control
+  systems. It monitors git repositories and sends real-time notifications
+  to IRC channels when commits, merges, and other events occur.
+grade: stable
+confinement: strict
+base: core22
+
+architectures:
+  - build-on: [amd64]
+  - build-on: [arm64]
+
+parts:
+  vext:
+    plugin: rust
+    source: https://github.com/hyperpolymath/vext.git
+    source-tag: v1.0.0
+    build-packages:
+      - pkg-config
+      - libssl-dev
+    rust-path: [vext-core]
+
+apps:
+  vextd:
+    command: bin/vextd
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+  vext-send:
+    command: bin/vext-send
+    plugs:
+      - network

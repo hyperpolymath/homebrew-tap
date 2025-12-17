@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+name: llm-unify
+version: '0.1.0-alpha'
+summary: Unified interface for multi-platform LLM conversations
+description: |
+  LLM Unify provides a unified interface for managing conversations across
+  multiple LLM platforms (Claude, GPT, Gemini, etc.). Import, search, and
+  analyze your AI conversation history from a single tool.
+
+  This is an ALPHA release - expect breaking changes.
+grade: devel
+confinement: strict
+base: core22
+
+architectures:
+  - build-on: [amd64]
+  - build-on: [arm64]
+
+parts:
+  llm-unify:
+    plugin: rust
+    source: https://github.com/hyperpolymath/llm-unify.git
+    source-tag: v0.1.0
+    build-packages:
+      - pkg-config
+      - libssl-dev
+      - libsqlite3-dev
+    rust-path: [crates/llm-unify-cli]
+
+apps:
+  llm-unify:
+    command: bin/llm-unify
+    plugs:
+      - home
+      - network

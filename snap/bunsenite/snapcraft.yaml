@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: MIT
+name: bunsenite
+version: '1.0.2'
+summary: Nickel configuration file parser with multi-language FFI bindings
+description: |
+  Bunsenite is a Nickel configuration file parser with multi-language
+  FFI bindings. It provides a Rust core library with a stable C ABI
+  layer that enables bindings for Deno, Rescript, and WebAssembly.
+
+  Features:
+  - Type Safety: Compile-time guarantees via Rust's type system
+  - Memory Safety: Rust ownership model, zero unsafe blocks
+  - Offline-First: Works completely air-gapped
+  - Multi-Language: FFI bindings for Deno, Rescript, and WASM
+grade: stable
+confinement: strict
+base: core22
+
+architectures:
+  - build-on: [amd64]
+  - build-on: [arm64]
+
+parts:
+  bunsenite:
+    plugin: rust
+    source: https://github.com/hyperpolymath/bunsenite.git
+    source-tag: v1.0.2
+    build-packages:
+      - pkg-config
+      - libssl-dev
+    rust-features: [full]
+
+apps:
+  bunsenite:
+    command: bin/bunsenite
+    plugs:
+      - home
+      - network
