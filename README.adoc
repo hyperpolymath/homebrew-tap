@@ -1,0 +1,16 @@
+= Homebrew Tap
+:toc: auto
+
+Homebrew tap for Hyperpolymath tools and applications.
+
+== Installation
+
+[source,bash]
+----
+brew tap hyperpolymath/tap
+brew install <formula>
+----
+
+== License
+
+AGPL-3.0-or-later
