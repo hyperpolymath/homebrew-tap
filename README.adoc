@@ -1,16 +1,256 @@
-= Homebrew Tap
-:toc: auto
+// SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2024-2025 hyperpolymath
+= Hyperpolymath Package Distribution Hub
+:toc: macro
+:toc-title: Contents
+:toclevels: 3
+:icons: font
+:source-highlighter: rouge
 
-Homebrew tap for Hyperpolymath tools and applications.
+Multi-platform package distribution repository for the Hyperpolymath software ecosystem.
+
+toc::[]
+
+== Overview
+
+This repository provides package manifests for distributing Hyperpolymath tools across all major package managers. It follows the "tap" pattern (Homebrew terminology) but extends to 9+ package ecosystems.
+
+=== Supported Package Managers
+
+[cols="1,2,1", options="header"]
+|===
+|Platform |Package Manager |Directory
+
+|macOS/Linux
+|Homebrew
+|`Formula/`
+
+|Windows
+|Scoop
+|`bucket/`
+
+|Windows
+|WinGet
+|`winget/`
+
+|Arch Linux
+|AUR
+|`aur/`
+
+|Debian/Ubuntu
+|APT
+|`apt/`
+
+|Fedora/RHEL/openSUSE
+|RPM
+|`rpm/`
+
+|Linux (Universal)
+|Flatpak
+|`flathub/`
+
+|Linux (Universal)
+|Snap
+|`snap/`
+
+|NixOS/Nix
+|Nix Flakes
+|`nix/`
+|===
+
+== Available Packages
+
+=== Production Ready
+
+[cols="1,3,1", options="header"]
+|===
+|Package |Description |Version
+
+|**bunsenite**
+|Nickel configuration file parser with multi-language FFI bindings (Rust, C, Python, ReScript)
+|1.0.2
+|===
+
+=== In Development
+
+[cols="1,3,1,1", options="header"]
+|===
+|Package |Description |Language |Status
+
+|**affinescript**
+|Programming language combining affine types with functional programming
+|OCaml
+|Scaffolded
+
+|**casket-ssg**
+|Pure functional static site generator
+|Haskell
+|Scaffolded
+
+|**czech-file-knife**
+|Universal file management toolkit with cloud integration and virtual filesystem (FUSE)
+|Rust
+|Scaffolded
+
+|**echidnabot**
+|Proof-aware CI bot for theorem proof verification (ECHIDNA orchestration)
+|Rust
+|Scaffolded
+
+|**kith**
+|TUI for `.well-known` directory management
+|Ada
+|Scaffolded
+
+|**llm-unify**
+|Unified interface for multi-platform LLM conversation management
+|Rust
+|Scaffolded
+
+|**vext**
+|High-performance IRC notification daemon for version control systems
+|Rust
+|Scaffolded
+
+|**zigzag-ssg**
+|High-performance static site generator
+|Zig
+|Scaffolded
+|===
 
 == Installation
+
+=== Homebrew (macOS/Linux)
 
 [source,bash]
 ----
 brew tap hyperpolymath/tap
-brew install <formula>
+brew install bunsenite
 ----
+
+=== Scoop (Windows)
+
+[source,powershell]
+----
+scoop bucket add hyperpolymath https://github.com/hyperpolymath/homebrew-tap
+scoop install hyperpolymath/bunsenite
+----
+
+=== AUR (Arch Linux)
+
+[source,bash]
+----
+yay -S bunsenite
+# or
+paru -S bunsenite
+----
+
+=== APT (Debian/Ubuntu)
+
+[source,bash]
+----
+echo "deb [trusted=yes] https://hyperpolymath.github.io/homebrew-tap/apt stable main" \
+  | sudo tee /etc/apt/sources.list.d/hyperpolymath.list
+sudo apt update && sudo apt install bunsenite
+----
+
+=== Nix
+
+[source,bash]
+----
+nix run github:hyperpolymath/homebrew-tap#bunsenite
+# or add to flake inputs
+----
+
+=== WinGet (Windows)
+
+[source,powershell]
+----
+winget install Hyperpolymath.Bunsenite
+----
+
+== Roadmap
+
+=== Phase 1: Foundation (Current)
+
+* [x] Repository structure with multi-platform manifests
+* [x] Homebrew formulas for all packages
+* [x] Scoop bucket for Windows
+* [x] AUR PKGBUILDs for Arch Linux
+* [x] Nix flake definitions
+* [x] GitHub Actions for APT/RPM repo generation
+* [x] Instant-sync workflow for forge propagation
+* [x] Security scanning (CodeQL, Semgrep)
+* [x] bunsenite 1.0.2 released with full SHA256 verification
+
+=== Phase 2: Package Releases
+
+* [ ] czech-file-knife 0.1.0 release with binaries
+* [ ] echidnabot 0.1.0 release
+* [ ] llm-unify 0.1.0 release
+* [ ] vext 1.0.0 release
+* [ ] GPG-signed APT/RPM repositories
+
+=== Phase 3: Language Tools
+
+* [ ] affinescript 0.1.0 (OCaml compiler release)
+* [ ] casket-ssg 1.0.0 (Haskell SSG)
+* [ ] zigzag-ssg 1.0.0 (Zig SSG)
+* [ ] kith 0.1.0 (Ada TUI)
+
+=== Phase 4: Ecosystem Expansion
+
+* [ ] Flatpak submissions to Flathub
+* [ ] Snap Store submissions
+* [ ] WinGet community repository PR
+* [ ] MacPorts portfiles
+* [ ] Chocolatey packages
+* [ ] Guix package definitions
+
+== Project Philosophy
+
+This distribution hub follows the **Hyperpolymath Standard**:
+
+* **Rust-first** for performance-critical tools
+* **ReScript** for type-safe frontend/scripting (not TypeScript)
+* **Deno** as JavaScript runtime (not Node.js)
+* **FOSS licensing** with MIT/AGPL-3.0 dual-license
+* **No Big Tech lock-in** (Tauri/Dioxus over React Native/Flutter)
+* **SHA-pinned dependencies** for supply chain security
+
+== Repository Structure
+
+[source]
+----
+.
+├── Formula/          # Homebrew formulas (Ruby)
+├── bucket/           # Scoop manifests (JSON)
+├── aur/              # Arch Linux PKGBUILDs
+├── apt/              # Debian package infrastructure
+├── rpm/              # RPM spec infrastructure
+├── flathub/          # Flatpak manifests (YAML/XML)
+├── nix/              # Nix flake + package expressions
+├── snap/             # Snapcraft definitions
+├── winget/           # WinGet manifests
+└── .github/
+    └── workflows/    # CI/CD automation
+----
+
+== Contributing
+
+. Fork this repository
+. Add or update package manifests
+. Ensure SHA256 checksums are correct
+. Submit a pull request
+
+For new packages, create manifests in all applicable directories.
 
 == License
 
-AGPL-3.0-or-later
+Dual-licensed under **MIT** or **AGPL-3.0-or-later** (your choice).
+
+See link:LICENSE.txt[LICENSE.txt] for full terms.
+
+---
+
+_Hyperpolymath: Building the consent-based internet._
