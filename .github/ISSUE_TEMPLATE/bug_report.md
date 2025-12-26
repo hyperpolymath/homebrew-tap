@@ -1,38 +1,52 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: "[Bug]: "
-labels: 'bug, priority: unset, triage'
+name: Package Bug
+about: Report an issue with installing or using a package
+title: "[Bug] "
+labels: 'bug, triage'
 assignees: ''
-
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## Package Information
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Package name**: (e.g., bunsenite, czech-file-knife)
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Package version**: (e.g., 1.0.2)
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Package manager**: (Homebrew / Scoop / AUR / Nix / Flatpak / Snap / WinGet / APT / RPM)
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Environment
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+**Operating System**: (e.g., macOS 14.2, Ubuntu 24.04, Windows 11, Arch Linux)
 
-**Additional context**
-Add any other context about the problem here.
+**Architecture**: (x86_64 / arm64 / other)
+
+**Package manager version**: (e.g., Homebrew 4.2.0)
+
+## Bug Description
+
+A clear description of what the bug is.
+
+## Steps to Reproduce
+
+1. Run `brew install ...`
+2. See error
+
+## Expected Behavior
+
+What you expected to happen.
+
+## Actual Behavior
+
+What actually happened.
+
+## Error Output
+
+```
+Paste any error messages here
+```
+
+## Additional Context
+
+- [ ] I verified the checksum matches the release artifact
+- [ ] I tried reinstalling the package
+- [ ] This issue affects the upstream software (not just the package manifest)

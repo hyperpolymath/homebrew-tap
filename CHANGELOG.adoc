@@ -1,0 +1,145 @@
+// SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2024-2025 hyperpolymath
+= Changelog
+:toc: macro
+:toc-title: Releases
+:icons: font
+
+All notable changes to the Hyperpolymath Package Distribution Hub.
+
+This project adheres to https://semver.org/[Semantic Versioning] for individual packages.
+
+toc::[]
+
+== Package Releases
+
+=== bunsenite
+
+==== v1.0.2 (Current)
+
+* Nickel configuration parser with multi-language FFI
+* Platforms: macOS (ARM64, x64), Linux (ARM64, x64), Windows
+* SHA256 verified releases
+
+==== v1.0.1
+
+* Initial stable release
+
+==== v1.0.0
+
+* First public release
+
+=== czech-file-knife
+
+==== v0.1.0 (Planned)
+
+* Universal file management toolkit
+* Cloud provider integration (S3, GCS, Azure)
+* FUSE virtual filesystem support
+
+=== echidnabot
+
+==== v0.1.0 (Planned)
+
+* Proof-aware CI bot
+* ECHIDNA theorem prover orchestration
+* GitHub Actions integration
+
+=== llm-unify
+
+==== v0.1.0 (Planned)
+
+* Unified LLM conversation interface
+* Multi-provider support
+* TUI client
+
+=== vext
+
+==== v1.0.0 (Planned)
+
+* IRC notification daemon
+* VCS webhook integration
+* High-performance async Rust
+
+=== affinescript
+
+==== v0.1.0 (Planned)
+
+* Affine-typed programming language
+* OCaml compiler
+* JavaScript backend
+
+=== casket-ssg
+
+==== v1.0.0 (Planned)
+
+* Pure functional static site generator
+* Haskell implementation
+* Pandoc integration
+
+=== zigzag-ssg
+
+==== v1.0.0 (Planned)
+
+* High-performance static site generator
+* Zig implementation
+* Minimal dependencies
+
+=== kith
+
+==== v0.1.0 (Planned)
+
+* TUI for .well-known directory management
+* Ada implementation
+* RFC compliance checking
+
+== Repository Changes
+
+=== 2025-01
+
+==== Added
+
+* Comprehensive README.adoc with roadmap
+* CONTRIBUTING.adoc guidelines
+* SECURITY.adoc policy
+* CODE_OF_CONDUCT.adoc
+* CHANGELOG.adoc (this file)
+* .editorconfig for consistency
+* CODEOWNERS for review requirements
+
+==== Changed
+
+* Updated issue templates for package repository context
+* Refined dependabot.yml for relevant ecosystems
+
+=== 2024-12
+
+==== Added
+
+* Initial repository structure
+* Homebrew formulas for all packages
+* Scoop bucket manifests
+* AUR PKGBUILDs
+* Nix flake definitions
+* Flatpak manifests
+* Snap configurations
+* WinGet manifests
+* APT/RPM repository infrastructure
+* GitHub Actions workflows:
+  ** CodeQL security scanning
+  ** Semgrep static analysis
+  ** APT repository generation
+  ** RPM repository generation
+  ** Instant-sync forge propagation
+  ** Workflow linting
+
+==== Security
+
+* HTTPS-only URLs enforced
+* SHA256 checksums for all release artifacts
+* Dependabot enabled
+* Security scanning workflows active
+
+---
+
+_Format based on https://keepachangelog.com/[Keep a Changelog]._
