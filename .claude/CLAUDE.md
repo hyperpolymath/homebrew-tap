@@ -1,18 +1,59 @@
 # CLAUDE.md - AI Assistant Instructions
 
+## Repository Context
+
+This is the **Hyperpolymath Package Distribution Hub** - a multi-platform package distribution repository containing manifests for Homebrew, Scoop, AUR, Nix, Flatpak, Snap, WinGet, APT, and RPM.
+
+### Repository Structure
+
+```
+Formula/      # Homebrew formulas (Ruby)
+bucket/       # Scoop manifests (JSON)
+aur/          # Arch Linux PKGBUILDs (Bash)
+nix/          # Nix flake + packages (Nix)
+flathub/      # Flatpak manifests (YAML/XML)
+snap/         # Snapcraft (YAML)
+winget/       # WinGet manifests (YAML)
+apt/          # Debian repository infrastructure
+rpm/          # RPM repository infrastructure
+```
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `README.adoc` | Main documentation |
+| `CONTRIBUTING.adoc` | Contribution guidelines |
+| `SECURITY.adoc` | Security policy |
+| `CHANGELOG.adoc` | Release history |
+| `LICENSE.txt` | MIT OR AGPL-3.0-or-later |
+
+### Common Tasks
+
+1. **Adding a package**: Create manifests in Formula/, bucket/, aur/, nix/, etc.
+2. **Updating versions**: Bump version + regenerate SHA256 in all manifests
+3. **Fixing checksums**: Verify SHA256 against actual release artifacts
+
+---
+
 ## Language Policy (Hyperpolymath Standard)
 
 ### ALLOWED Languages & Tools
 
 | Language/Tool | Use Case | Notes |
 |---------------|----------|-------|
+| **Ruby** | Homebrew formulas | Formula DSL only |
+| **Bash/POSIX Shell** | PKGBUILDs, scripts | Keep minimal |
+| **Nix** | Nix expressions | flake.nix, packages |
+| **YAML** | Flatpak, Snap, WinGet, workflows | Config only |
+| **JSON** | Scoop manifests | Config only |
+| **XML** | Flatpak metainfo | AppStream data |
 | **ReScript** | Primary application code | Compiles to JS, type-safe |
 | **Deno** | Runtime & package management | Replaces Node/npm/bun |
 | **Rust** | Performance-critical, systems, WASM | Preferred for CLI tools |
 | **Tauri 2.0+** | Mobile apps (iOS/Android) | Rust backend + web UI |
 | **Dioxus** | Mobile apps (native UI) | Pure Rust, React-like |
 | **Gleam** | Backend services | Runs on BEAM or compiles to JS |
-| **Bash/POSIX Shell** | Scripts, automation | Keep minimal |
 | **JavaScript** | Only where ReScript cannot | MCP protocol glue, Deno APIs |
 | **Python** | SaltStack only | No other Python permitted |
 | **Nickel** | Configuration language | For complex configs |
@@ -68,3 +109,15 @@ Both are FOSS with independent governance (no Big Tech).
 - No hardcoded secrets
 - SHA-pinned dependencies
 - SPDX license headers on all files
+
+### Manifest Guidelines
+
+When creating or updating package manifests:
+
+1. Always verify SHA256 checksums against actual artifacts
+2. Use HTTPS URLs exclusively
+3. Include SPDX license header comment
+4. Follow platform-specific conventions:
+   - Homebrew: `brew style Formula/*.rb`
+   - AUR: `namcap`, `shellcheck`
+   - Nix: `nixfmt`, `statix`

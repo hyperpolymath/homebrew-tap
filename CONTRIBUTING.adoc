@@ -1,0 +1,207 @@
+// SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2024-2025 hyperpolymath
+= Contributing to Hyperpolymath Package Distribution Hub
+:toc: macro
+:toc-title: Contents
+:icons: font
+
+Thank you for your interest in contributing to the Hyperpolymath package distribution infrastructure.
+
+toc::[]
+
+== Quick Start
+
+[source,bash]
+----
+# Fork and clone
+git clone https://github.com/YOUR_USERNAME/homebrew-tap.git
+cd homebrew-tap
+
+# Create a branch
+git checkout -b feature/your-feature-name
+
+# Make changes, then commit
+git add .
+git commit -m "feat: add new package manifest"
+
+# Push and create PR
+git push origin feature/your-feature-name
+----
+
+== Types of Contributions
+
+=== Adding a New Package
+
+To add a new Hyperpolymath package to the distribution hub:
+
+. Create manifests in *all applicable* directories:
++
+[cols="1,2", options="header"]
+|===
+|Directory |Required For
+
+|`Formula/`
+|macOS/Linux (Homebrew)
+
+|`bucket/`
+|Windows (Scoop)
+
+|`aur/`
+|Arch Linux
+
+|`nix/`
+|NixOS/Nix users
+
+|`snap/`
+|Ubuntu/Snap users
+
+|`flathub/`
+|Linux desktop apps
+
+|`winget/`
+|Windows 10/11
+|===
+
+. Ensure SHA256 checksums are correct for all release artifacts
+. Test locally where possible
+. Submit a pull request
+
+=== Updating Package Versions
+
+. Update the version number in all manifests
+. Regenerate SHA256 checksums from the new release artifacts
+. Test the installation on at least one platform
+. Submit a pull request with the version bump
+
+=== Fixing Package Issues
+
+. Identify which manifest(s) are affected
+. Make the minimal fix required
+. Test the fix locally if possible
+. Submit a pull request referencing the issue
+
+== Commit Message Format
+
+We follow https://www.conventionalcommits.org/[Conventional Commits]:
+
+[source]
+----
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+----
+
+=== Types
+
+* `feat` - New package or feature
+* `fix` - Bug fix in manifests
+* `docs` - Documentation only
+* `chore` - Maintenance tasks
+* `ci` - CI/CD changes
+
+=== Scopes
+
+* Package name: `bunsenite`, `czech-file-knife`, etc.
+* Platform: `homebrew`, `aur`, `nix`, `scoop`, etc.
+* General: `deps`, `ci`, `docs`
+
+=== Examples
+
+[source]
+----
+feat(bunsenite): bump to v1.0.3
+
+fix(aur/echidnabot): correct makedepends
+
+docs: update installation instructions for Nix
+
+chore(ci): add SHA256 verification workflow
+----
+
+== Pull Request Process
+
+. Ensure all manifests are syntactically valid
+. Update version numbers consistently across all platforms
+. Verify SHA256 checksums match actual release artifacts
+. Fill out the PR template completely
+. Wait for CI checks to pass
+. Request review from maintainers
+
+== Code Style
+
+=== Ruby (Homebrew Formulas)
+
+* Follow https://docs.brew.sh/Formula-Cookbook[Homebrew Formula Cookbook]
+* Use 2-space indentation
+* Include SPDX license header
+
+=== Bash (PKGBUILDs)
+
+* Follow Arch Linux packaging guidelines
+* Use `shellcheck` for validation
+* Quote all variables
+
+=== Nix
+
+* Follow https://nixos.org/manual/nixpkgs/stable/[Nixpkgs conventions]
+* Use `nixfmt` for formatting
+
+=== YAML/JSON
+
+* 2-space indentation
+* No trailing whitespace
+* Newline at end of file
+
+== Testing Locally
+
+=== Homebrew
+
+[source,bash]
+----
+brew install --build-from-source ./Formula/package.rb
+brew test package
+----
+
+=== Scoop
+
+[source,powershell]
+----
+scoop install .\bucket\package.json
+----
+
+=== AUR
+
+[source,bash]
+----
+cd aur/package
+makepkg -si
+----
+
+=== Nix
+
+[source,bash]
+----
+nix build .#package
+----
+
+== Security
+
+* Never commit secrets, API keys, or tokens
+* Always use HTTPS URLs (no HTTP)
+* Pin dependencies with SHA256 checksums
+* Report security issues privately (see SECURITY.adoc)
+
+== License
+
+By contributing, you agree that your contributions will be licensed under the same dual MIT/AGPL-3.0-or-later license as the project.
+
+== Questions?
+
+* Open a https://github.com/hyperpolymath/homebrew-tap/discussions[Discussion]
+* File an https://github.com/hyperpolymath/homebrew-tap/issues[Issue]
+
+---
+
+_Thank you for helping make Hyperpolymath better!_

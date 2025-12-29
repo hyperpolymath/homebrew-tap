@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussions
+    url: https://github.com/hyperpolymath/homebrew-tap/discussions
+    about: Ask questions and discuss packages
+  - name: Upstream Issues
+    url: https://github.com/hyperpolymath
+    about: For bugs in the software itself (not packaging), report to the upstream repository
+  - name: Security Vulnerabilities
+    url: https://github.com/hyperpolymath/homebrew-tap/security/advisories/new
+    about: Report security issues privately

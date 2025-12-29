@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2024-2025 hyperpolymath
+#
+# CODEOWNERS - Define code ownership for review requirements
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything
+* @hyperpolymath
+
+# Homebrew formulas
+/Formula/ @hyperpolymath
+
+# Scoop bucket
+/bucket/ @hyperpolymath
+
+# AUR packages
+/aur/ @hyperpolymath
+
+# Nix packages
+/nix/ @hyperpolymath
+
+# Flatpak
+/flathub/ @hyperpolymath
+
+# Snap
+/snap/ @hyperpolymath
+
+# WinGet
+/winget/ @hyperpolymath
+
+# APT/RPM infrastructure
+/apt/ @hyperpolymath
+/rpm/ @hyperpolymath
+
+# CI/CD workflows - require review
+/.github/workflows/ @hyperpolymath
+
+# Security-sensitive files
+/SECURITY.adoc @hyperpolymath
+/.github/dependabot.yml @hyperpolymath
+
+# Documentation
+/README.adoc @hyperpolymath
+/CONTRIBUTING.adoc @hyperpolymath
+/CHANGELOG.adoc @hyperpolymath
