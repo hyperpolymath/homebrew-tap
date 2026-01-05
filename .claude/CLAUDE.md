@@ -68,7 +68,6 @@ rpm/          # RPM repository infrastructure
 | **Dioxus** | Mobile apps (native UI) | Pure Rust, React-like |
 | **Gleam** | Backend services | Runs on BEAM or compiles to JS |
 | **JavaScript** | Only where ReScript cannot | MCP protocol glue, Deno APIs |
-| **Python** | SaltStack only | No other Python permitted |
 | **Nickel** | Configuration language | For complex configs |
 | **Guile Scheme** | State/meta files | STATE.scm, META.scm, ECOSYSTEM.scm |
 | **Julia** | Batch scripts, data processing | Per RSR |
@@ -85,7 +84,7 @@ rpm/          # RPM repository infrastructure
 | Bun | Deno |
 | pnpm/yarn | Deno |
 | Go | Rust |
-| Python (general) | ReScript/Rust |
+| Python | Julia/Rust/ReScript |
 | Java/Kotlin | Rust/Tauri/Dioxus |
 | Swift | Tauri/Dioxus |
 | React Native | Tauri/Dioxus |
@@ -106,7 +105,7 @@ Both are FOSS with independent governance (no Big Tech).
 2. **No package.json for runtime deps** - Use deno.json imports
 3. **No node_modules in production** - Deno caches deps automatically
 4. **No Go code** - Use Rust instead
-5. **Python only for SaltStack** - All other Python must be rewritten
+5. **No Python anywhere** - Use Julia for data/batch, Rust for systems, ReScript for apps
 6. **No Kotlin/Swift for mobile** - Use Tauri 2.0+ or Dioxus
 
 ### Package Management
