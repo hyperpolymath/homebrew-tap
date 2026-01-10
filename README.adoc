@@ -1,10 +1,13 @@
-image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
+image:https://img.shields.io/badge/license-PMPL--1.0-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
 image:https://img.shields.io/badge/Philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
 
 
-// SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
+// SPDX-License-Identifier: PMPL-1.0 OR PMPL-1.0-or-later
 // SPDX-FileCopyrightText: 2024-2025 hyperpolymath
 = Hyperpolymath Package Distribution Hub
+
+
+
 
 :toc: macro
 :toc-title: Contents
@@ -219,7 +222,7 @@ This distribution hub follows the **Hyperpolymath Standard**:
 * **Rust-first** for performance-critical tools
 * **ReScript** for type-safe frontend/scripting (not TypeScript)
 * **Deno** as JavaScript runtime (not Node.js)
-* **FOSS licensing** with MIT/AGPL-3.0 dual-license
+* **FOSS licensing** with PMPL-1.0/PMPL-1.0 dual-license
 * **No Big Tech lock-in** (Tauri/Dioxus over React Native/Flutter)
 * **SHA-pinned dependencies** for supply chain security
 
@@ -252,7 +255,7 @@ For new packages, create manifests in all applicable directories.
 
 == License
 
-Dual-licensed under **MIT** or **AGPL-3.0-or-later** (your choice).
+Dual-licensed under **PMPL-1.0** or **PMPL-1.0-or-later** (your choice).
 
 See link:LICENSE.txt[LICENSE.txt] for full terms.
 
