@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: PMPL-1.0-or-later
 name: bunsenite
 version: '1.0.2'
 summary: Nickel configuration file parser with multi-language FFI bindings

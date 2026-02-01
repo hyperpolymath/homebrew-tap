@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: PMPL-1.0-or-later
 name: llm-unify
 version: '0.1.0-alpha'
 summary: Unified interface for multi-platform LLM conversations
