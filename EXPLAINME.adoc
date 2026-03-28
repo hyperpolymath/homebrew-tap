@@ -1,27 +1,28 @@
-= Homebrew Tap — EXPLAINME
-:toc: preamble
+// SPDX-License-Identifier: PMPL-1.0-or-later
 
-This document backs up the claims made in README with evidence and rationale.
+= homebrew-tap -- EXPLAINME
 
-== What Is This?
+== "Homebrew formulae for hyperpolymath tools"
 
-Homebrew Tap is a hyperpolymath project. See README.adoc for usage.
+[quote, Formula/boj-server.rb]
+____
+Cartridge-based MCP server with 53 formally verified domain cartridges.
+____
 
-== Why These Choices?
+This tap provides `brew install` access to hyperpolymath CLI tools.
+Currently ships a single formula for
+https://github.com/hyperpolymath/boj-server[boj-server].
 
-=== Language
+**Caveat:** The formula references a release tag (`v0.3.1`) whose tarball
+SHA-256 is not yet pinned (marked `UPDATE_ON_RELEASE`).
 
-The language(s) used in this project were chosen per the hyperpolymath
-language policy (see CLAUDE.md for the full list of allowed/banned languages).
+[cols="1,2", options="header"]
+|===
+| Path | Proves
 
-=== Architecture
+| `Formula/boj-server.rb`
+| Homebrew formula: install, test, and dependency declarations for boj-server
 
-Architecture decisions are documented in `.machine_readable/` checkpoint files.
-
-== Alternatives Considered
-
-(To be filled in as the project matures.)
-
-== Proof of Claims
-
-(Link formal verification results from the `proven` repo where applicable.)
+| `contractiles/`
+| Contractile validation rules for the tap
+|===
