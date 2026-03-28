@@ -2,7 +2,7 @@
 
 = homebrew-tap -- EXPLAINME
 
-== "Homebrew formulae for hyperpolymath tools"
+== Homebrew formulae for hyperpolymath tools
 
 [quote, Formula/boj-server.rb]
 ____
