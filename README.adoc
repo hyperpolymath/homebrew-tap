@@ -1,0 +1,70 @@
+// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= homebrew-tap
+:toc: preamble
+:icons: font
+:author: Jonathan D.A. Jewell
+:email: j.d.a.jewell@open.ac.uk
+
+*Homebrew tap for hyperpolymath CLI tools.*
+
+image:https://img.shields.io/badge/License-PMPL--1.0--or--later-blue.svg[License: PMPL-1.0-or-later]
+image:https://img.shields.io/badge/homebrew-tap-yellow.svg[Homebrew tap]
+
+== What this is
+
+This is the official https://brew.sh[Homebrew] tap for hyperpolymath tools.
+It lets macOS (and Linux) users install hyperpolymath binaries via `brew`
+without manual compilation.
+
+== Install
+
+[source,bash]
+----
+# Add the tap once
+brew tap hyperpolymath/tap
+
+# Install BoJ server (cartridge-based MCP server)
+brew install boj-server
+----
+
+== Available formulae
+
+[cols="1,2,2", options="header"]
+|===
+| Formula | Installs | Source
+
+| `boj-server`
+| Bundle of Joy MCP server — 53 formally verified domain cartridges
+| https://github.com/hyperpolymath/boj-server[hyperpolymath/boj-server]
+|===
+
+== Repository layout
+
+[cols="2,3", options="header"]
+|===
+| Path | What it contains
+
+| `Formula/boj-server.rb`
+| Homebrew formula: install recipe, test block, and dependency declarations
+
+| `contractiles/`
+| Contractile validation rules (RSR standard)
+|===
+
+== Notes for maintainers
+
+The `boj-server.rb` formula contains a `sha256 "UPDATE_ON_RELEASE"` placeholder
+that must be replaced with the actual tarball SHA-256 when cutting a release.
+Run `sha256sum <tarball>` or use `brew fetch --build-from-source` to obtain it.
+
+See link:EXPLAINME.adoc[EXPLAINME.adoc] for the full implementation map.
+
+== License
+
+PMPL-1.0-or-later. See `LICENSE`.
+
+== Author
+
+Jonathan D.A. Jewell +
+j.d.a.jewell@open.ac.uk
