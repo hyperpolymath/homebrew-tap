@@ -1,0 +1,67 @@
+*Homebrew tap for hyperpolymath CLI tools.*
+
+https://www.bestpractices.dev/en/projects/new?repo_url=https://github.com/hyperpolymath/homebrew-tap[image:https://img.shields.io/badge/OpenSSF-Best_Practices-green?logo=opensourcesecurity[OpenSSF
+Best Practices]]
+https://opensource.org/licenses/MPL-2.0[image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[License:
+MPL-2.0]]
+image:https://img.shields.io/badge/homebrew-tap-yellow.svg[Homebrew tap]
+
+== What this is
+
+This is the official https://brew.sh[Homebrew] tap for hyperpolymath
+tools. It lets macOS (and Linux) users install hyperpolymath binaries
+via `+brew+` without manual compilation.
+
+== Install
+
+[source,bash]
+----
+# Add the tap once
+brew tap hyperpolymath/tap
+
+# Install BoJ server (cartridge-based MCP server)
+brew install boj-server
+----
+
+== Available formulae
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Formula |Installs |Source
+|`+boj-server+` |Bundle of Joy MCP server — 53 formally verified domain
+cartridges
+|https://github.com/hyperpolymath/boj-server[hyperpolymath/boj-server]
+|===
+
+== Repository layout
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|Path |What it contains
+|`+Formula/boj-server.rb+` |Homebrew formula: install recipe, test
+block, and dependency declarations
+
+|`+contractiles/+` |Contractile validation rules (RSR standard)
+|===
+
+== Notes for maintainers
+
+The `+boj-server.rb+` formula contains a `+sha256+`
+`+"UPDATE_ON_RELEASE"+` placeholder that must be replaced with the
+actual tarball SHA-256 when cutting a release. Run `+sha256sum+`
+`+<tarball>+` or use `+brew+` `+fetch+` `+--build-from-source+` to
+obtain it.
+
+See EXPLAINME for the full implementation map.
+
+== License
+
+This project is licensed under the Mozilla Public License, v. 2.0. See
+the `+LICENSE+` file for details.
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+== Author
+
+Jonathan D.A. Jewell +
+j.d.a.jewell@open.ac.uk
